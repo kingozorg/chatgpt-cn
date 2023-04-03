@@ -109,7 +109,14 @@ function autoresize() {
         'font-size': '15px',
         'line-height': '20px',
         'white-space': 'pre-wrap'
-    }).html(content).appendTo('body');
+    }).appendTo('body');
+    //The issue you're facing is because you're injecting the content into the DOM using the html() method,
+    //which causes the browser to parse and execute any script tags present in the content.
+    //To prevent this, you can create a text node instead of using the html() method.
+    // Create a text node with the content and append it to the div
+    var textNode = document.createTextNode(content);
+    div[0].appendChild(textNode);
+
     var height = div.height();
     var rows = Math.ceil(height / 20);
     div.remove();
