@@ -6,7 +6,7 @@ session_start();
 $postData = $_SESSION['data'];
 $_SESSION['response'] = "";
 $ch = curl_init();
-$OPENAI_API_KEY = "sk-replace_with_your_api_key_dude";
+# $OPENAI_API_KEY = "HERE-!!!!!!!!!!!!!";
 if (isset($_SESSION['key'])) {
     $OPENAI_API_KEY = $_SESSION['key'];
 }
