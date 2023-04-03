@@ -1,5 +1,7 @@
 # chatgpt
-GPT-4 has been released, enter the group to join the discussion ...... Free to join the group, will soon reach 500 people limit, want to add quickly. There are already people in the group who have access to the GPT-4 interface, but it does not support image input at the moment and the model is expensive.
+Translated info and text to english. 
+Will add some stuff ...
+
 ------
 **2023-03-16 updated version log:** 1.
 
