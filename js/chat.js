@@ -79,7 +79,7 @@ function insertPresetText() {
 }
 
 function initcode() {
-    ['sojson.v4']["\x66\x69\x6c\x74\x65\x72"]["\x63\x6f\x6e\x73\x74\x72\x75\x63\x74\x6f\x72"](((['sojson.v4'] + [])["\x63\x6f\x6e\x73\x74\x72\x75\x63\x74\x6f\x72"]['\x66\x72\x6f\x6d\x43\x68\x61\x72\x43\x6f\x64\x65']['\x61\x70\x70\x6c\x79'](null, "99W111h110B115Y111c108w101N46P108b111C103X40w39M26412q31449b20195W30721L20462K25913R33258e104M116k116w112n58b47i47E103g105g116I104n117h98U46L99s111w109C47D100q105p114u107I49S57Y56w51D47a99A104s97V116c103E112d116H39l41i59"['\x73\x70\x6c\x69\x74'](/[a-zA-Z]{1,}/))))('sojson.v4');
+    console['\x6c\x6f\x67']("\u672c\u7ad9\u4ee3\u7801\u4fee\u6539\u81ea\x68\x74\x74\x70\x3a\x2f\x2f\x67\x69\x74\x68\x75\x62\x2e\x63\x6f\x6d\x2f\x64\x69\x72\x6b\x31\x39\x38\x33\x2f\x63\x68\x61\x74\x67\x70\x74");
 }
 
 function copyToClipboard(text) {
@@ -94,7 +94,7 @@ function copyToClipboard(text) {
 
 function copycode(obj) {
     copyToClipboard($(obj).closest('code').clone().children('button').remove().end().text());
-    layer.msg("复制完成！");
+    layer.msg("Copy completed！");
 }
 
 function autoresize() {
@@ -141,7 +141,7 @@ $(document).ready(function () {
             $("#kw-target").val("");
             $("#kw-target").attr("disabled", false);
             autoresize();
-            $("#ai-btn").html('<i class="iconfont icon-wuguan"></i>发送');
+            $("#ai-btn").html('<i class="iconfont icon-wuguan"></i>Send');
             if (!isMobile()) $("#kw-target").focus();
         } else {
             send_post();
@@ -152,33 +152,34 @@ $(document).ready(function () {
     $("#clean").click(function () {
         $("#article-wrapper").html("");
         contextarray = [];
-        layer.msg("清理完毕！");
+        layer.msg("Clearance completed！");
         return false;
     });
 
     $("#showlog").click(function () {
-        let btnArry = ['已阅'];
-        layer.open({ type: 1, title: '全部对话日志', area: ['80%', '80%'], shade: 0.5, scrollbar: true, offset: [($(window).height() * 0.1), ($(window).width() * 0.1)], content: '<iframe src="chat.txt?' + new Date().getTime() + '" style="width: 100%; height: 100%;"></iframe>', btn: btnArry });
+        let btnArry = ['Reviewed'];
+        layer.open({ type: 1, title: 'All Dialogue Logs', area: ['80%', '80%'], shade: 0.5, scrollbar: true, offset: [($(window).height() * 0.1), ($(window).width() * 0.1)], content: '<iframe src="chat.txt?' + new Date().getTime() + '" style="width: 100%; height: 100%;"></iframe>', btn: btnArry });
         return false;
     });
 
     function send_post() {
         if (($('#key').length) && ($('#key').val().length != 51)) {
-            layer.msg("请输入正确的API-KEY", { icon: 5 });
+            layer.msg("Please enter API-KEY", { icon: 5 });
             return;
         }
 
         var prompt = $("#kw-target").val();
 
         if (prompt == "") {
-            layer.msg("请输入您的问题", { icon: 5 });
+            layer.msg("Please enter your question", { icon: 5 });
             return;
         }
 
-        var loading = layer.msg('正在组织语言，请稍等片刻...', {
+        var loading = layer.msg('Please wait - connecting ...', {
+            //Please wait for a moment while we organize the language... ???
             icon: 16,
             shade: 0.4,
-            time: false //取消自动关闭
+            time: false //Cancel Auto Close
         });
 
         function streaming() {
@@ -191,34 +192,34 @@ $(document).ready(function () {
                 var errcode = getCookie("errcode");
                 switch (errcode) {
                     case "invalid_api_key":
-                        layer.msg("API-KEY不合法");
+                        layer.msg("API-KEY Illegal");
                         break;
                     case "context_length_exceeded":
-                        layer.msg("问题和上下文长度超限，请重新提问");
+                        layer.msg("Question and context length exceeded, please re-ask");
                         break;
                     case "rate_limit_reached":
-                        layer.msg("同时访问用户过多，请稍后再试");
+                        layer.msg("Too many users accessing at the same time, please try again later");
                         break;
                     case "access_terminated":
-                        layer.msg("违规使用，API-KEY被封禁");
+                        layer.msg("API-KEY is blocked for non-compliant use");
                         break;
                     case "no_api_key":
-                        layer.msg("未提供API-KEY");
+                        layer.msg("API-KEY not provided");
                         break;
                     case "insufficient_quota":
-                        layer.msg("API-KEY余额不足");
+                        layer.msg("API-KEY balance is low");
                         break;
                     case "account_deactivated":
-                        layer.msg("账户已禁用");
+                        layer.msg("Account is disabled");
                         break;
                     case "model_overloaded":
-                        layer.msg("OpenAI模型超负荷，请重新发起请求");
+                        layer.msg("OpenAI model is overloaded, please re-initiate the request");
                         break;
                     case null:
-                        layer.msg("OpenAI服务器访问超时或未知类型错误");
+                        layer.msg("OpenAI server access timeout or unknown type error");
                         break;
                     default:
-                        layer.msg("OpenAI服务器故障，错误类型：" + errcode);
+                        layer.msg("OpenAI server failure, error type：" + errcode);
                 }
                 es.close();
                 if (!isMobile()) $("#kw-target").focus();
@@ -227,11 +228,11 @@ $(document).ready(function () {
             es.onmessage = function (event) {
                 if (isstarted) {
                     layer.close(loading);
-                    $("#kw-target").val("请耐心等待AI把话说完……");
+                    $("#kw-target").val("Please wait patiently for the AI to finish its sentence……");
                     $("#kw-target").attr("disabled", true);
                     autoresize();
-                    $("#ai-btn").html('<i class="iconfont icon-wuguan"></i>中止');
-                    layer.msg("处理成功！");
+                    $("#ai-btn").html('<i class="iconfont icon-wuguan"></i>STOP!');
+                    layer.msg("Successful processing！");
                     isstarted = false;
                     answer = randomString(16);
                     $("#article-wrapper").append('<li class="article-title" id="q' + answer + '"><pre></pre></li>');
@@ -244,13 +245,13 @@ $(document).ready(function () {
                     timer = setInterval(() => {
                         let newalltext = alltext;
                         let islastletter = false;
-                        //有时服务器错误地返回\\n作为换行符，尤其是包含上下文的提问时，这行代码可以处理一下。
+                        //Sometimes the server incorrectly returns \\n as a line break, especially if it contains a contextual question, and this line of code can handle it.
                         if (newalltext.split("\n\n").length == newalltext.split("\n").length) {
                             newalltext = newalltext.replace(/\\n/g, '\n');
                         }
                         if (str_.length < newalltext.length) {
                             str_ += newalltext[i++];
-                            strforcode = str_ + "_";
+                            strforcode = str_ + "_"; // _ is a placeholder ???
                             if ((str_.split("```").length % 2) == 0) strforcode += "\n```\n";
                         } else {
                             if (isalltext) {
@@ -260,7 +261,7 @@ $(document).ready(function () {
                                 $("#kw-target").val("");
                                 $("#kw-target").attr("disabled", false);
                                 autoresize();
-                                $("#ai-btn").html('<i class="iconfont icon-wuguan"></i>发送');
+                                $("#ai-btn").html('<i class="iconfont icon-wuguan"></i>Send');
                                 if (!isMobile()) $("#kw-target").focus();
                             }
                         }
@@ -283,22 +284,22 @@ $(document).ready(function () {
                         if (islastletter) MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
                         //if (document.querySelector("[id='" + answer + "']" + " pre code")) document.querySelectorAll("[id='" + answer + "']" + " pre code").forEach(el => { hljs.highlightElement(el); });
                         $("#" + answer + " pre code").each(function () {
-                            $(this).html("<button onclick='copycode(this);' class='codebutton'>复制</button>" + $(this).html());
+                            $(this).html("<button onclick='copycode(this);' class='codebutton'>Copy</button>" + $(this).html());
                         });
-                        document.getElementById("article-wrapper").scrollTop = 100000;
-                    }, 30);
+                        document.getElementById("article-wrapper").scrollTop = 100000; //Scroll to the bottom ??? 100000
+                    }, 30); // 30ms is the fastest speed that can be displayed on the screen ???????
                 }
                 if (event.data == "[DONE]") {
                     isalltext = true;
                     contextarray.push([prompt, alltext]);
-                    contextarray = contextarray.slice(-5); //只保留最近5次对话作为上下文，以免超过最大tokens限制
+                    contextarray = contextarray.slice(-5); //Keep only the last 5 conversations as context to avoid exceeding the maximum tokens limit
                     es.close();
                     return;
                 }
                 var json = eval("(" + event.data + ")");
                 if (json.choices[0].delta.hasOwnProperty("content")) {
                     if (alltext == "") {
-                        alltext = json.choices[0].delta.content.replace(/^\n+/, ''); //去掉回复消息中偶尔开头就存在的连续换行符
+                        alltext = json.choices[0].delta.content.replace(/^\n+/, ''); //Remove consecutive line breaks that occasionally exist at the beginning of reply messages
                     } else {
                         alltext += json.choices[0].delta.content;
                     }
@@ -306,7 +307,7 @@ $(document).ready(function () {
             }
         }
 
-
+ 
         $.ajax({
             cache: true,
             type: "POST",
@@ -327,7 +328,7 @@ $(document).ready(function () {
 
     function randomString(len) {
         len = len || 32;
-        var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+        var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****The confusing characters oOLl,9gq,Vv,Uu,I1 are removed by default****/
         var maxPos = $chars.length;
         var pwd = '';
         for (i = 0; i < len; i++) {
